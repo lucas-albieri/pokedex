@@ -3,78 +3,28 @@ import { Layout } from "../../components/layout"
 import wpp from "../../assets/images/wpp1.png"
 import { SearchIcon } from "@chakra-ui/icons"
 import { PokemonCard } from "./components/pokemonCard"
-import { PokemonModel } from "../../models/pokemon-model"
+import { useState } from "react"
+import { useQuery } from "@apollo/client"
+import { fetchPokemons } from "../../queries/fetchPokemons"
 
 export const PokemonsPage = () => {
 
-    const test = [
+    const [limit, setLimit] = useState(20);
+    const [offset, setOffset] = useState(0);
+    const allPokemonsOfLimit = useQuery(fetchPokemons,
         {
-            name: "Charizard",
-            type: "fire",
-            id: 6,
-            sprites: {
-                back_default: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/6.png",
-                back_shiny: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/shiny/6.png",
-                front_default: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/6.png",
-                front_shiny: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/6.png"
+            variables: {
+                limit: limit,
+                offset: offset,
+                _name: '%%',
+                id: 0,
             }
-        },
-        {
-            name: "Bulbasaur",
-            type: "grass",
-            id: 1,
-            sprites: {
-                back_default: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/1.png",
-                back_shiny: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/shiny/1.png",
-                front_default: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
-                front_shiny: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/1.png"
-            }
-        },
-        {
-            name: "Squirtle",
-            type: "water",
-            id: 7,
-            sprites: {
-                back_default: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/7.png",
-                back_shiny: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/shiny/7.png",
-                front_default: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png",
-                front_shiny: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/7.png"
-            }
-        },
-        {
-            name: "Pikachu",
-            type: "electric",
-            id: 25,
-            sprites: {
-                back_default: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/25.png",
-                back_shiny: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/shiny/25.png",
-                front_default: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png",
-                front_shiny: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/25.png"
-            }
-        },
-        {
-            name: "Gengar",
-            type: "ghost",
-            id: 94,
-            sprites: {
-                back_default: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/94.png",
-                back_shiny: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/shiny/94.png",
-                front_default: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/94.png",
-                front_shiny: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/94.png"
-            }
-        },
-        {
-            name: "Mewtwo",
-            type: "psychic",
-            id: 150,
-            sprites: {
-                back_default: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/150.png",
-                back_shiny: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/shiny/150.png",
-                front_default: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/150.png",
-                front_shiny: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/150.png"
-            }
-        }
-    ] as PokemonModel[]
+        });
+
+    const pokemons = allPokemonsOfLimit.data?.pokemon_v2_pokemon
+
+
+    if (allPokemonsOfLimit.loading) return <Text>Carregando...</Text>
 
     return (
         <Layout>
@@ -174,19 +124,20 @@ export const PokemonsPage = () => {
                     alignItems={"center"}
                     justifyContent={"center"}
                     gap={20}
-                    bgColor={"white"}
+                    bgColor={"gray.100"}
                     borderRadius={"md"}
                     color={"gray.800"}
                     px={6}
                     py={8}
                     w={"full"}
+
                 >
                     <Grid
                         gap={8}
                         templateColumns='repeat(5, 1fr)'
                     >
                         {
-                            test.map((pokemon: any) => {
+                            pokemons?.map((pokemon: any) => {
                                 return (
                                     <GridItem
                                         key={pokemon.name}

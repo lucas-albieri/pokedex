@@ -1,28 +1,31 @@
-import { TypeEnum } from "../enuns/TypeEnum"
+// import { TypeEnum } from "../enuns/TypeEnum"
+
+export interface PokemonType {
+    id: number;
+    pokemon_v2_type: {
+        name: string;
+    };
+}
+
+export interface PokemonSprite {
+    sprites: {
+        other: {
+            "official-artwork": {
+                front_default: string
+            }
+        }
+    }
+}
 
 export type PokemonModel = {
     name: string
-    type: TypeEnum
-    image?: string
     id: number
-    // base_experience: number
-    // height: number
-    // weight: number
-    // abilities: string[]
-    // stats: {
-    //     hp: number
-    //     attack: number
-    //     defense: number
-    //     special_attack: number
-    //     special_defense: number
-    //     speed: number
-    // }
-    // types: string[]
-    // moves: string[]
-    sprites?: {
-        back_default: string
-        back_shiny: string
-        front_default: string
-        front_shiny: string
-    }
+    pokemon_v2_pokemontypes: PokemonType[]
+    pokemon_v2_pokemonsprites: PokemonSprite[]
+}
+
+export interface FetchPokemonsVariables {
+    limit: number;
+    offset: number;
+    name: string;
 }
