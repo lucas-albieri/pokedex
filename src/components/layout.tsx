@@ -7,7 +7,7 @@ type Props = {
     padding?: boolean
 }
 
-export const Layout = ({ children, padding }: Props) => {
+export const Layout = ({ children, padding = true }: Props) => {
     return (
         <Box
             w={"100%"}
@@ -19,6 +19,7 @@ export const Layout = ({ children, padding }: Props) => {
                     base: 2,
                     md: padding ? 60 : 0
                 }}
+                pt={padding ? 20 : 0}
             >
                 {children}
             </Stack>

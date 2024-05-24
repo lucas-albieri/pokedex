@@ -8,7 +8,6 @@ export const Navbar = () => {
     const { isOpen, onToggle } = useDisclosure()
     const [isScrolled, setIsScrolled] = useState(false);
 
-
     const onScroll = () => {
         if (window.scrollY >= 66) {
             setIsScrolled(true);
@@ -27,7 +26,7 @@ export const Navbar = () => {
             zIndex={2}
         >
             <Flex
-                backgroundColor={isScrolled ? "white" : "transparent"}
+                backgroundColor={isScrolled ? "#0f0f0f" : "transparent"}
                 padding={isScrolled ? "1.2rem 12rem" : "2rem 12rem"}
                 position={"fixed"}
                 w="100%"
@@ -136,7 +135,7 @@ const DesktopNav = () => {
                     cursor={"pointer"}
                     fontSize={'sm'}
                     fontWeight={500}
-                    color={"gray.100"}
+                    color={"gray.50"}
                     _hover={{
                         color: "white",
                         pb: -2,
@@ -164,7 +163,7 @@ const MobileNav = () => {
 }
 
 const MobileNavItem = ({ label, href }: NavItem) => {
-    const { isOpen, onToggle } = useDisclosure()
+    const { onToggle } = useDisclosure()
 
     return (
         <Stack spacing={4} onClick={onToggle}>
