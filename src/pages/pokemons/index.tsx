@@ -1,4 +1,4 @@
-import { Box, Flex, Grid, GridItem, Image, Input, Stack, Text } from "@chakra-ui/react"
+import { Box, Center, Flex, Grid, GridItem, Image, Input, Stack, Text } from "@chakra-ui/react"
 import { Layout } from "../../components/layout"
 import wpp from "../../assets/images/wpp1.png"
 import { SearchIcon } from "@chakra-ui/icons"
@@ -152,7 +152,20 @@ export const PokemonsPage = () => {
                             })
                         }
                     </Grid>
-
+                    <Center>
+                        <Text
+                            fontSize={"2xl"}
+                            fontWeight={600}
+                            color={"gray.900"}
+                            cursor={"pointer"}
+                            onClick={() => {
+                                setOffset(offset + 20)
+                                setLimit(limit + 20)
+                            }}
+                        >
+                            Carregar mais
+                        </Text>
+                    </Center>
                 </Flex>
             </Stack>
         </Layout>
