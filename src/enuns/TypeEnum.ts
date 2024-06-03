@@ -39,3 +39,44 @@ export const typeColors = {
     [TypeEnum.steel]: "#B8B8D0",
     [TypeEnum.dark]: "#705848"
 }
+
+export function getTypeTranslations(type: TypeEnum) {
+    switch (type) {
+        case TypeEnum.fire:
+            return "Fogo"
+        case TypeEnum.water:
+            return "Água"
+        case TypeEnum.grass:
+            return "Planta"
+        case TypeEnum.bug:
+            return "Inseto"
+        case TypeEnum.normal:
+            return "Normal"
+        case TypeEnum.poison:
+            return "Venenoso"
+        case TypeEnum.electric:
+            return "Elétrico"
+        case TypeEnum.ground:
+            return "Terra"
+        case TypeEnum.fairy:
+            return "Fada"
+        case TypeEnum.fighting:
+            return "Lutador"
+        case TypeEnum.psychic:
+            return "Psíquico"
+        case TypeEnum.rock:
+            return "Pedra"
+        case TypeEnum.ghost:
+            return "Fantasma"
+        case TypeEnum.ice:
+            return "Gelo"
+        case TypeEnum.dragon:
+            return "Dragão"
+        case TypeEnum.flying:
+            return "Voador"
+        case TypeEnum.steel:
+            return "Aço"
+        case TypeEnum.dark:
+            return "Noturno"
+    }
+} 

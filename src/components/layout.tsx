@@ -1,4 +1,4 @@
-import { Box, Stack } from "@chakra-ui/react"
+import { Stack } from "@chakra-ui/react"
 import { ReactNode } from "react"
 import { Navbar } from "./navbar"
 
@@ -9,11 +9,17 @@ type Props = {
 
 export const Layout = ({ children, padding = true }: Props) => {
     return (
-        <Box
+        <Stack
             w={"100%"}
+            h={"100vh"}
+            overflow={"hidden"}
+            bgColor={"gray.900"}
+            pos={"relative"}
         >
             <Navbar />
             <Stack
+                h={"100%"}
+                overflowY={"auto"}
                 w={"100%"}
                 px={{
                     base: 2,
@@ -24,6 +30,6 @@ export const Layout = ({ children, padding = true }: Props) => {
                 {children}
             </Stack>
 
-        </Box>
+        </Stack>
     )
 }

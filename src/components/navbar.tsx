@@ -23,10 +23,10 @@ export const Navbar = () => {
 
     return (
         <Box
-            zIndex={2}
+            zIndex={4}
         >
             <Flex
-                backgroundColor={isScrolled ? "#0f0f0f" : "transparent"}
+                backgroundColor={isScrolled ? "#0f0f0f" : "#fff"}
                 padding={isScrolled ? "1.2rem 12rem" : "2rem 12rem"}
                 position={"fixed"}
                 w="100%"
@@ -43,7 +43,7 @@ export const Navbar = () => {
                     md: 60
                 }}
                 align={'center'}
-                borderBottom={isScrolled ? "1px solid #efebf5" : "none"}
+                borderBottom={isScrolled ? "1px solid #efebf5" : "2px solid #efebf5"}
             >
                 <Flex
                     flex={{
@@ -135,9 +135,9 @@ const DesktopNav = () => {
                     cursor={"pointer"}
                     fontSize={'sm'}
                     fontWeight={500}
-                    color={"gray.50"}
+                    color={"gray.800"}
                     _hover={{
-                        color: "white",
+                        color: "gray.900",
                         pb: -2,
                         borderBottom: "solid 1px",
                         borderColor: "white"

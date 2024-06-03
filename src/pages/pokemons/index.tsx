@@ -1,36 +1,53 @@
-import { Box, Center, Flex, Grid, GridItem, Image, Input, Stack, Text } from "@chakra-ui/react"
+import { Box, Button, Center, Flex, Grid, GridItem, Image, Input, Spinner, Stack, Text } from "@chakra-ui/react"
 import { Layout } from "../../components/layout"
-import wpp from "../../assets/images/wpp1.png"
+import wpp from "../../assets/images/wpp.jpg"
 import { SearchIcon } from "@chakra-ui/icons"
 import { PokemonCard } from "./components/pokemonCard"
-import { useState } from "react"
+import { ChangeEvent, useCallback, useState } from "react"
 import { useQuery } from "@apollo/client"
 import { fetchPokemons } from "../../queries/fetchPokemons"
+import debounce from 'lodash.debounce';
 
 export const PokemonsPage = () => {
 
     const [limit, setLimit] = useState(20);
     const [offset, setOffset] = useState(0);
+    const [name, setName] = useState('%%' as string)
+    const [inputValue, setInputValue] = useState<string>('');
     const allPokemonsOfLimit = useQuery(fetchPokemons,
         {
             variables: {
                 limit: limit,
                 offset: offset,
-                _name: '%%',
-                id: 0,
+                _name: name ?? '%%',
             }
         });
 
     const pokemons = allPokemonsOfLimit.data?.pokemon_v2_pokemon
 
+    const debouncedSave = useCallback(
+        debounce((nextValue: string) => setName(nextValue), 1000),
+        []
+    );
 
-    if (allPokemonsOfLimit.loading) return <Text>Carregando...</Text>
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+        const { value } = e.target;
+        if (value === '') {
+            setInputValue("")
+            setName("%%")
+            return
+        }
+        setInputValue(value);
+        debouncedSave(value);
+    };
 
     return (
         <Layout>
             <Image
                 src={wpp}
                 position={"absolute"}
+                h={"100vh"}
+                w={"100%"}
                 top={0}
                 left={0}
                 style={{
@@ -40,17 +57,6 @@ export const PokemonsPage = () => {
             <Stack
                 zIndex={2}
             >
-                {/* <Box
-                    bgColor={"white"}
-                >
-                    <Text
-                        fontSize={"4xl"}
-                        fontWeight={600}
-                        color={"gray.900"}
-                    >
-                        Pokedex
-                    </Text>
-                </Box> */}
                 <Flex
                     flexDir={"row"}
                     alignItems={"center"}
@@ -80,6 +86,9 @@ export const PokemonsPage = () => {
                         >
                             <Input
                                 placeholder="Ex: Charizard"
+                                onChange={handleChange}
+                                value={inputValue}
+
                             />
                             <Box
                                 bgColor={"indigo.500"}
@@ -120,52 +129,84 @@ export const PokemonsPage = () => {
                     </Box>
                 </Flex>
                 <Flex
-                    flexDir={"row"}
+                    flexDir={"column"}
                     alignItems={"center"}
                     justifyContent={"center"}
-                    gap={20}
-                    bgColor={"gray.100"}
+                    gap={14}
+                    bgColor={"white"}
                     borderRadius={"md"}
-                    color={"gray.800"}
                     px={6}
                     py={8}
-                    w={"full"}
-
                 >
-                    <Grid
-                        gap={8}
-                        templateColumns='repeat(5, 1fr)'
-                    >
-                        {
-                            pokemons?.map((pokemon: any) => {
-                                return (
-                                    <GridItem
-                                        key={pokemon.name}
-                                        colSpan={1}
-                                        rowSpan={1}
-                                    >
-                                        <PokemonCard
-                                            pokemon={pokemon}
-                                        />
-                                    </GridItem>
-                                )
-                            })
-                        }
-                    </Grid>
-                    <Center>
-                        <Text
-                            fontSize={"2xl"}
-                            fontWeight={600}
-                            color={"gray.900"}
-                            cursor={"pointer"}
-                            onClick={() => {
-                                setOffset(offset + 20)
-                                setLimit(limit + 20)
-                            }}
+                    {
+                        allPokemonsOfLimit.loading ? <Box
+                            display={"flex"}
+                            flexDir={"column"}
+                            alignItems={"center"}
+                            justifyContent={"center"}
+                            py={40}
+                            gap={10}
                         >
-                            Carregar mais
-                        </Text>
-                    </Center>
+                            <Spinner
+                                w={24}
+                                h={24}
+                            />
+                            <Text>
+                                Procurando mais pokemons...
+                            </Text>
+                        </Box> :
+                            <>
+                                <Grid
+                                    gap={8}
+                                    templateColumns='repeat(5, 1fr)'
+                                >
+                                    {
+                                        pokemons?.map((pokemon: any) => {
+                                            return (
+                                                <GridItem
+                                                    key={pokemon.name}
+                                                    colSpan={1}
+                                                    rowSpan={1}
+                                                >
+                                                    <PokemonCard
+                                                        pokemon={pokemon}
+                                                    />
+                                                </GridItem>
+                                            )
+                                        })
+                                    }
+                                </Grid>
+                                {
+                                    name === '%%' && <Center
+                                        gap={8}
+                                    >
+                                        <Button
+                                            variant={"outline"}
+
+                                            colorScheme="indigo"
+                                            display={offset === 0 ? "none" : "block"}
+                                            onClick={() => {
+                                                setOffset(offset - 20)
+                                                setLimit(limit)
+                                            }}
+                                        >
+                                            20 Pokemons Anteriores
+                                        </Button>
+                                        <Button
+                                            colorScheme="indigo"
+                                            onClick={() => {
+                                                setOffset(offset + 20)
+                                                setLimit(limit)
+                                            }}
+                                        >
+                                            Próximos 20 Pokemons
+                                        </Button>
+
+                                    </Center>
+                                }
+
+                            </>
+                    }
                 </Flex>
             </Stack>
         </Layout>
