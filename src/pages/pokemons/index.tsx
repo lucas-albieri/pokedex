@@ -7,9 +7,11 @@ import { ChangeEvent, useCallback, useState } from "react"
 import { useQuery } from "@apollo/client"
 import { fetchPokemons } from "../../queries/fetchPokemons"
 import debounce from 'lodash.debounce';
+import { useNavigate, useSearchParams } from "react-router-dom"
 
 export const PokemonsPage = () => {
 
+    const navigate = useNavigate();
     const [limit, setLimit] = useState(20);
     const [offset, setOffset] = useState(0);
     const [name, setName] = useState('%%' as string)
@@ -114,7 +116,6 @@ export const PokemonsPage = () => {
                     <Box
                         display={"flex"}
                         w={"30%"}
-
                     >
                         <Text
                             bgColor="indigo.500"
@@ -167,6 +168,11 @@ export const PokemonsPage = () => {
                                                     key={pokemon.name}
                                                     colSpan={1}
                                                     rowSpan={1}
+                                                    onClick={() => {
+                                                        navigate(`/pokemon?name=${pokemon.name}`)
+                                                        // searchParams.set('id', pokemon.id)
+                                                        // setSearchParams(searchParams)
+                                                    }}
                                                 >
                                                     <PokemonCard
                                                         pokemon={pokemon}
