@@ -1,10 +1,16 @@
-// import { TypeEnum } from "../enuns/TypeEnum"
 
 export interface PokemonType {
     id: number;
     pokemon_v2_type: {
         name: string;
+        pokemon_v2_typeefficacies: {
+            damage_factor: number;
+            pokemonV2TypeByTargetTypeId: {
+                name: string;
+            };
+        }[];
     };
+
 }
 
 export interface PokemonSprite {
@@ -46,11 +52,14 @@ export interface PokemonSpecies {
     pokemon_v2_pokemonspeciesflavortexts: {
         flavor_text: string
     }[]
+    gender_rate: number
 }
 
 export type PokemonModel = {
     name: string
     id: number
+    height: number
+    weight: number
     pokemon_v2_pokemontypes: PokemonType[]
     pokemon_v2_pokemonsprites: PokemonSprite[]
     pokemon_v2_pokemonabilities?: PokemonAbility[]
