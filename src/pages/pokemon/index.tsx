@@ -1,6 +1,6 @@
 import { useQuery } from "@apollo/client";
 import { Layout } from "../../components/layout"
-import { useSearchParams } from "react-router-dom";
+// import { useSearchParams } from "react-router-dom";
 import { Box, Flex, Grid, Image, Spinner, Stack, Text } from "@chakra-ui/react";
 import { PokemonModel } from "../../models/pokemon-model";
 import { fetchPokemonById } from "../../queries/fetchPokemonById";
@@ -12,7 +12,7 @@ ChartJS.register(RadialLinearScale, PointElement, LineElement, Filler, Tooltip, 
 
 export const PokemonPage = () => {
 
-    const [searchParams] = useSearchParams();
+    // const [searchParams] = useSearchParams();
 
     const pokemonParams = useQuery(fetchPokemonById,
         {
@@ -255,7 +255,7 @@ export const PokemonPage = () => {
                                         mt={2}
                                     >
                                         {
-                                            pokemon?.pokemon_v2_pokemontypes[0].pokemon_v2_type.pokemon_v2_typeefficacies.map((type, index) => (
+                                            pokemon?.pokemon_v2_pokemontypes[0].pokemon_v2_type.pokemon_v2_typeefficacies.map((type) => (
 
                                                 <Box
                                                     bgColor={typeColors[type.pokemonV2TypeByTargetTypeId.name as keyof typeof typeColors]}
