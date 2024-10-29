@@ -37,7 +37,7 @@ export const typeColors = {
     [TypeEnum.dragon]: "#7038F8",
     [TypeEnum.flying]: "#A890F0",
     [TypeEnum.steel]: "#B8B8D0",
-    [TypeEnum.dark]: "#705848"
+    [TypeEnum.dark]: "#2a2c4a"
 }
 
 export function getTypeTranslations(type: TypeEnum) {

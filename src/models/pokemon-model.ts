@@ -56,6 +56,7 @@ export interface PokemonSpecies {
 }
 
 export type PokemonModel = {
+    pokemon_v2_type: PokemonType[]
     name: string
     id: number
     height: number

@@ -54,15 +54,15 @@ export const BarChart = ({ values }: ChartProps) => {
                     display: false,
                 },
                 ticks: {
-                    color: '#fff', // Cor do texto do eixo X
+                    color: '#282829', // Cor do texto do eixo X
                 },
             },
             y: {
                 grid: {
-                    display: false,
+                    display: true,
                 },
                 ticks: {
-                    color: '#fff', // Cor do texto do eixo Y
+                    color: '#282829', // Cor do texto do eixo Y
                 },
             },
 
@@ -70,17 +70,17 @@ export const BarChart = ({ values }: ChartProps) => {
         plugins: {
             legend: {
                 labels: {
-                    color: '#fff', // Cor do texto da legenda
+                    color: '#000', // Cor do texto da legenda
                 },
             },
             tooltip: {
-                titleColor: '#000', // Cor do título do tooltip
-                bodyColor: '#000', // Cor do corpo do tooltip
-                backgroundColor: '#fff', // Cor de fundo do tooltip
+                titleColor: '#fff', // Cor do título do tooltip
+                bodyColor: '#fff', // Cor do corpo do tooltip
+                backgroundColor: '#000', // Cor de fundo do tooltip
                 borderColor: '#fff', // Borda branca
             },
             datalabels: {
-                color: '#fff', // Cor do texto
+                color: '#282829', // Cor do texto
                 font: {
                     size: 11, // Tamanho da fonte
                 },
