@@ -1,120 +1,51 @@
 import { useQuery } from "@apollo/client";
 import { Layout } from "../../components/layout"
-// import { useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import { Box, Flex, Grid, Image, Spinner, Stack, Text } from "@chakra-ui/react";
 import { PokemonModel } from "../../models/pokemon-model";
 import { fetchPokemonById } from "../../queries/fetchPokemonById";
 import { getTypeTranslations, typeColors, TypeEnum } from "../../enuns/TypeEnum";
-import { Radar } from 'react-chartjs-2';
 import { Chart as ChartJS, RadialLinearScale, PointElement, LineElement, Filler, Tooltip, Legend } from 'chart.js';
+import { BarChart } from "./components/BarChart";
+import { Loading } from "./components/Loading";
+import { hexToRgba } from "../../functions/hexToRgba";
 
 ChartJS.register(RadialLinearScale, PointElement, LineElement, Filler, Tooltip, Legend);
 
 export const PokemonPage = () => {
 
-    // const [searchParams] = useSearchParams();
+    const [searchParams] = useSearchParams();
 
     const pokemonParams = useQuery(fetchPokemonById,
         {
             variables: {
-                // name: searchParams.get('name') ?? '%%',
-                name: "charizard" ?? '%%',
-
+                name: searchParams.get('name') ?? '%%',
+                // name: "charizard",
             },
-
         });
 
     const pokemon = pokemonParams.data?.pokemon_v2_pokemon[0] as PokemonModel
-
-    console.log(pokemonParams)
-
-    type ChartProps = {
-        values: number[]
-    }
-    const RadarChart = ({ values }: ChartProps) => {
-        const data = {
-            labels: ['HP', 'Attack', 'Defense', 'Sp. Attack', 'Sp. Defense', 'Speed'],
-            datasets: [
-                {
-                    label: 'Base Stats',
-                    data: [values[0], values[1], values[2], values[3], values[4], values[5]],
-                    backgroundColor: 'rgba(67, 162, 252, 0.2)',  // Cor de preenchimento
-                    borderColor: 'rgb(67, 162, 252)',  // Cor da borda
-                    borderWidth: 3,  // Largura da borda
-                },
-            ],
-        };
-
-        const options = {
-            scales: {
-                r: {
-                    grid: {
-                        color: '#fff', // Cor das linhas do grid
-                    },
-                    angleLines: {
-                        color: '#fff', // Cor das linhas dos ângulos
-                    },
-                    ticks: {
-                        backdropColor: 'transparent', // Remove o fundo dos rótulos
-                        color: '#fff', // Cor dos rótulos
-                    },
-                    pointLabels: {
-                        color: '#fff', // Cor das labels dos eixos
-                    },
-                    suggestedMin: 0,
-                    suggestedMax: 100,
-                },
-            },
-            plugins: {
-                legend: {
-                    labels: {
-                        color: '#fff', // Cor do texto da legenda
-                    },
-                },
-                tooltip: {
-                    titleColor: '#000', // Cor do título do tooltip
-                    bodyColor: '#000', // Cor do corpo do tooltip
-                    backgroundColor: '#fff', // Cor de fundo do tooltip
-                    borderColor: '#fff', // Borda branca
-                },
-            },
-            maintainAspectRatio: false,
-        };
-
-        return <Radar data={data} options={options} />;
-    };
-
-    console.log(pokemon?.pokemon_v2_pokemonstats?.map(stat => stat.base_stat))
 
     return (
         <Layout
         >
             {
-                pokemonParams.loading ? <Box
-                    display={"flex"}
-                    flexDir={"column"}
-                    alignItems={"center"}
-                    justifyContent={"center"}
-                    py={40}
-                    gap={10}
-                >
-                    <Spinner
-                        w={24}
-                        h={24}
-                        color="purple.500"
-                    />
-                    <Text
-                        color={"gray.200"}
-                    >
-                        Pesquisando Pokemon...
-                    </Text>
-                </Box>
+                pokemonParams.loading ? <Loading />
                     : <Stack
                         w={"100%"}
                         bgColor={"white"}
-                        px={4}
+                        px={14}
                         py={4}
                         borderRadius={8}
+                        border={"2px solid"}
+                        borderColor={hexToRgba(typeColors[pokemon?.pokemon_v2_pokemontypes[0].pokemon_v2_type.name as keyof typeof typeColors], 1)}
+                        boxShadow={`
+                                        0 0 20px ${typeColors[pokemon?.pokemon_v2_pokemontypes[0].pokemon_v2_type.name as keyof typeof typeColors]},
+                                        0 0 10px ${typeColors[pokemon?.pokemon_v2_pokemontypes[0].pokemon_v2_type.name as keyof typeof typeColors]},
+                                        0 0 10px ${typeColors[pokemon?.pokemon_v2_pokemontypes[0].pokemon_v2_type.name as keyof typeof typeColors]},
+                                        0 0 10px ${typeColors[pokemon?.pokemon_v2_pokemontypes[0].pokemon_v2_type.name as keyof typeof typeColors]},
+                                        0 0 40px ${typeColors[pokemon?.pokemon_v2_pokemontypes[0].pokemon_v2_type.name as keyof typeof typeColors]};`
+                        }
                     >
                         <Flex
                             alignItems={"center"}
@@ -122,7 +53,7 @@ export const PokemonPage = () => {
                             justifyContent={"center"}
                         >
                             <Text
-                                fontSize={"4xl"}
+                                fontSize={"5xl"}
                                 fontWeight={"bold"}
                                 textTransform={"capitalize"}
                             >
@@ -136,19 +67,24 @@ export const PokemonPage = () => {
                         </Flex>
                         <Flex
                             alignItems={"flex-start"}
-                            gap={4}
+                            gap={20}
                             justifyContent={"center"}
                         >
                             <Box
                                 w={"50%"}
                                 display={"flex"}
-                                mt={4}
+                                mt={2}
                                 flexDir={"column"}
+                                gap={10}
                             >
                                 <Box
                                     display={"flex"}
                                     justifyContent={"center"}
                                     alignItems={"center"}
+                                    bg={
+                                        hexToRgba(typeColors[pokemon?.pokemon_v2_pokemontypes[0].pokemon_v2_type.name as keyof typeof typeColors], 0.1)
+                                    }
+                                    borderRadius={8}
                                 >
                                     <Image
                                         src={pokemon?.pokemon_v2_pokemonsprites[0].sprites.other["official-artwork"].front_default}
@@ -156,14 +92,14 @@ export const PokemonPage = () => {
                                         w={"60%"}
                                     />
                                 </Box>
-                                Status
+
                                 <Box
-                                    h={"450px"}
                                     bgColor={"gray.700"}
                                     borderRadius={8}
                                     py={2}
+                                    px={20}
                                 >
-                                    <RadarChart
+                                    <BarChart
                                         values={pokemon?.pokemon_v2_pokemonstats?.map(stat => stat.base_stat) ?? [0, 0, 0, 0, 0, 0]}
                                     />
                                 </Box>
