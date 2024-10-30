@@ -13,7 +13,7 @@ export const Layout = ({ children, padding = true }: Props) => {
             w={"100%"}
             h={"100vh"}
             overflow={"hidden"}
-            bgColor={"gray.900"}
+            bgColor={"#1c1c1c"}
             pos={"relative"}
         >
             <Navbar />

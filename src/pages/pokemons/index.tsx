@@ -7,7 +7,7 @@ import { ChangeEvent, useCallback, useState } from "react"
 import { useQuery } from "@apollo/client"
 import { fetchPokemons } from "../../queries/fetchPokemons"
 import debounce from 'lodash.debounce';
-import { useNavigate, useSearchParams } from "react-router-dom"
+import { useNavigate, } from "react-router-dom"
 
 export const PokemonsPage = () => {
 
