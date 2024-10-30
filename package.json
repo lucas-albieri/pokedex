@@ -29,7 +29,8 @@
     "react-helmet-async": "^2.0.5",
     "react-player": "^2.16.0",
     "react-router-dom": "^6.26.1",
-    "styled-components": "^6.1.13"
+    "styled-components": "^6.1.13",
+    "sweetalert2": "^11.14.4"
   },
   "devDependencies": {
     "@types/react": "^18.3.5",

@@ -11,6 +11,7 @@ import { Loading } from "./components/Loading";
 import { hexToRgba } from "../../functions/hexToRgba";
 import { PokemonInfos } from "./components/PokemonInfos";
 import StrongAgainst from "./components/StrongAgainst";
+import TranslateComponent from "../../api/translate";
 
 ChartJS.register(RadialLinearScale, PointElement, LineElement, Filler, Tooltip, Legend);
 
@@ -117,7 +118,9 @@ export const PokemonPage = () => {
                                 <Text
                                     fontSize={"xl"}
                                 >
-                                    {pokemon?.pokemon_v2_pokemonspecy?.pokemon_v2_pokemonspeciesflavortexts[0].flavor_text ?? "Sem descrição"}
+                                    <TranslateComponent
+                                        text={pokemon?.pokemon_v2_pokemonspecy?.pokemon_v2_pokemonspeciesflavortexts[0].flavor_text ?? "Sem descrição"}
+                                    />
                                 </Text>
                                 <Grid
                                     templateColumns={"repeat(2, 1fr)"}
