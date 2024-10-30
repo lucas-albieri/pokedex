@@ -12,6 +12,7 @@ import { hexToRgba } from "../../functions/hexToRgba";
 import { PokemonInfos } from "./components/PokemonInfos";
 import StrongAgainst from "./components/StrongAgainst";
 import TranslateComponent from "../../api/translate";
+import EvolutionLine from "./components/EvolutionLine";
 
 ChartJS.register(RadialLinearScale, PointElement, LineElement, Filler, Tooltip, Legend);
 
@@ -29,11 +30,9 @@ export const PokemonPage = () => {
 
     const pokemon = pokemonParams.data?.pokemon_v2_pokemon[0] as PokemonModel
 
-    console.log(pokemon?.pokemon_v2_pokemontypes[0].pokemon_v2_type, 'aqui')
 
     return (
-        <Layout
-        >
+        <Layout >
             {
                 pokemonParams.loading ? <Loading />
                     : <Stack
@@ -113,6 +112,7 @@ export const PokemonPage = () => {
                                 w={"35%"}
                                 display={"flex"}
                                 flexDir={"column"}
+                                gap={6}
                                 py={10}
                             >
                                 <Text
@@ -161,7 +161,6 @@ export const PokemonPage = () => {
                                 {/* tipos  */}
 
                                 <Box
-                                    mt={4}
                                 >
                                     <Text
                                         fontWeight={"bold"}
@@ -194,6 +193,11 @@ export const PokemonPage = () => {
                                 {/* fortes contra  */}
                                 <StrongAgainst
                                     pokemon_v2_typeefficacies={pokemon?.pokemon_v2_pokemontypes[0].pokemon_v2_type.pokemon_v2_typeefficacies ?? []}
+                                />
+
+                                {/* linha evolutiva */}
+                                <EvolutionLine
+                                    evolutionChain={pokemon?.pokemon_v2_pokemonspecy?.pokemon_v2_evolutionchain as any}
                                 />
                             </Box>
                         </Flex>

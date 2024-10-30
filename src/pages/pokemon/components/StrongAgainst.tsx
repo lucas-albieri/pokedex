@@ -12,12 +12,8 @@ type Props = {
 
 export default function StrongAgainst({ pokemon_v2_typeefficacies }: Props) {
 
-    console.log(pokemon_v2_typeefficacies)
-
     return (
-        <Box
-            mt={4}
-        >
+        <Box>
             <Text
                 fontWeight={"bold"}
                 fontSize={"xl"}

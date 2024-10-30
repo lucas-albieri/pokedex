@@ -9,8 +9,6 @@ type Props = {
 }
 export function PokemonInfos({ label, value }: Props) {
 
-
-    console.log(label, value)
     return (
         <Flex
             flexDirection={"column"}

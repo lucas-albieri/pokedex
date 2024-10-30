@@ -53,6 +53,16 @@ export interface PokemonSpecies {
         flavor_text: string
     }[]
     gender_rate: number
+    pokemon_v2_evolutionchain: {
+        id: number
+        pokemon_v2_pokemonspecies: {
+            name: string
+            pokemon_v2_pokemons: {
+                id: number
+                pokemon_v2_pokemonsprites: PokemonSprite
+            }[]
+        }[]
+    }
 }
 
 export type PokemonModel = {
