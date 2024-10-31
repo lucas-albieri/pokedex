@@ -22,10 +22,15 @@ export const Layout = ({ children, padding = true }: Props) => {
                 overflowY={"auto"}
                 w={"100%"}
                 px={{
-                    base: 2,
-                    md: padding ? 60 : 0
+                    base: padding ? 2 : 0,
+                    lg: padding ? 30 : 0,
+                    xl: padding ? 60 : 0
                 }}
-                pt={padding ? 20 : 0}
+                pt={{
+                    base: padding ? 16 : 0,
+                    md: padding ? 24 : 0
+                }}
+                pb={padding ? 10 : 0}
             >
                 {children}
             </Stack>

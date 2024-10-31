@@ -22,6 +22,10 @@ export default function EvolutionLine({ evolutionChain }: Props) {
     return (
         <Flex
             direction="column"
+            mt={{
+                base: 2,
+                md: 0
+            }}
         >
             <Text
                 fontWeight={"bold"}
@@ -30,8 +34,9 @@ export default function EvolutionLine({ evolutionChain }: Props) {
                 Linha evolutiva
             </Text>
             <Flex
-                gap={6}
+                gap={4}
                 mt={2}
+                flexWrap={"wrap"}
             >
                 {evolutionChain.pokemon_v2_pokemonspecies.map((species) => (
                     <Flex

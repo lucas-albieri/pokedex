@@ -34,7 +34,7 @@ export const typeColors = {
     [TypeEnum.rock]: "#B8A038",
     [TypeEnum.ghost]: "#705898",
     [TypeEnum.ice]: "#98D8D8",
-    [TypeEnum.dragon]: "#7038F8",
+    [TypeEnum.dragon]: "#5555c4",
     [TypeEnum.flying]: "#A890F0",
     [TypeEnum.steel]: "#B8B8D0",
     [TypeEnum.dark]: "#2a2c4a"
