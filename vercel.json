@@ -1,0 +1,32 @@
+{
+    "rewrites": [
+        {
+            "source": "/(.*)",
+            "destination": "/"
+        },
+        {
+            "source": "/api/(.*)",
+            "destination": "/api/$1"
+        },
+        {
+            "source": "/auth/(.*)",
+            "destination": "/auth/$1"
+        },
+        {
+            "source": "/pokemons/(.*)",
+            "destination": "/pokemons/$1"
+        },
+        {
+            "source": "/pokemons",
+            "destination": "/pokemons"
+        },
+        {
+            "source": "/pokemon",
+            "destination": "/pokemon"
+        },
+        {
+            "source": "/pokemon/(.*)",
+            "destination": "/pokemon/$1"
+        }
+    ]
+}
