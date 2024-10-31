@@ -1,19 +1,20 @@
 import { Box, Button, Center, Flex, Grid, GridItem, Image, Input, Spinner, Stack, Text } from "@chakra-ui/react"
 import { Layout } from "../../components/layout"
-import wpp from "../../assets/images/wpp.jpg"
+import wpp from "../../assets/images/wpp4.png"
 import { SearchIcon } from "@chakra-ui/icons"
 import { PokemonCard } from "./components/pokemonCard"
 import { ChangeEvent, useCallback, useState } from "react"
 import { useQuery } from "@apollo/client"
 import { fetchPokemons } from "../../queries/fetchPokemons"
 import debounce from 'lodash.debounce';
-import { useNavigate, } from "react-router-dom"
+import { useNavigate, useSearchParams, } from "react-router-dom"
 
 export const PokemonsPage = () => {
 
+    const [searchParams, setSearchParams] = useSearchParams()
+    const offset = searchParams.get('offset') ? Number(searchParams.get('offset')) : 0
     const navigate = useNavigate();
     const [limit, setLimit] = useState(20);
-    const [offset, setOffset] = useState(0);
     const [name, setName] = useState('%%' as string)
     const [inputValue, setInputValue] = useState<string>('');
     const allPokemonsOfLimit = useQuery(fetchPokemons,
@@ -21,7 +22,7 @@ export const PokemonsPage = () => {
             variables: {
                 limit: limit,
                 offset: offset,
-                _name: name ?? '%%',
+                _name: name.toLocaleLowerCase() ?? '%%',
             }
         });
 
@@ -60,10 +61,16 @@ export const PokemonsPage = () => {
                 zIndex={2}
             >
                 <Flex
-                    flexDir={"row"}
+                    flexDir={{
+                        base: "column",
+                        lg: "row"
+                    }}
                     alignItems={"center"}
                     justifyContent={"center"}
-                    gap={20}
+                    gap={{
+                        base: 6,
+                        lg: 20
+                    }}
                     bgColor={"white"}
                     borderRadius={"md"}
                     color={"gray.800"}
@@ -80,27 +87,26 @@ export const PokemonsPage = () => {
                             fontSize={"3xl"}
                             fontWeight={700}
                         >
-                            Nome ou Número
+                            Nome do pokemon
                         </Text>
                         <Flex
                             alignItems={"center"}
                             gap={3}
+                            pos={"relative"}
                         >
                             <Input
                                 placeholder="Ex: Charizard"
                                 onChange={handleChange}
                                 value={inputValue}
-
                             />
                             <Box
-                                bgColor={"indigo.500"}
-                                p={2}
                                 px={3}
                                 borderRadius={"md"}
-                                cursor={"pointer"}
+                                pos={"absolute"}
+                                right={0}
                             >
                                 <SearchIcon
-                                    color={"white"}
+                                    color={"gray"}
                                 />
                             </Box>
 
@@ -115,17 +121,27 @@ export const PokemonsPage = () => {
                     </Box>
                     <Box
                         display={"flex"}
-                        w={"30%"}
+                        w={{
+                            base: "100%",
+                            md: "50%",
+                            lg: "30%"
+                        }}
                     >
                         <Text
                             bgColor="indigo.500"
                             borderRadius={"md"}
-                            px={4}
+                            px={{
+                                base: 2,
+                                lg: 4,
+                            }}
                             py={3}
-                            fontSize={"lg"}
+                            fontSize={{
+                                base: "sm",
+                                lg: "lg",
+                            }}
                             color={"white"}
                         >
-                            Realize a busca pelo nome ou número do seu pokemon da Pokedex Nacional
+                            Realize a busca pelo nome do seu pokemon da Pokedex Nacional
                         </Text>
                     </Box>
                 </Flex>
@@ -158,8 +174,15 @@ export const PokemonsPage = () => {
                         </Box> :
                             <>
                                 <Grid
-                                    gap={8}
-                                    templateColumns='repeat(5, 1fr)'
+                                    gap={{
+                                        base: 2,
+                                        md: 8
+                                    }}
+                                    templateColumns={{
+                                        base: 'repeat(2, 1fr)',
+                                        md: 'repeat(4, 1fr)',
+                                        lg: 'repeat(5, 1fr)'
+                                    }}
                                 >
                                     {
                                         pokemons?.map((pokemon: any) => {
@@ -170,8 +193,6 @@ export const PokemonsPage = () => {
                                                     rowSpan={1}
                                                     onClick={() => {
                                                         navigate(`/pokemon?name=${pokemon.name}`)
-                                                        // searchParams.set('id', pokemon.id)
-                                                        // setSearchParams(searchParams)
                                                     }}
                                                 >
                                                     <PokemonCard
@@ -184,24 +205,41 @@ export const PokemonsPage = () => {
                                 </Grid>
                                 {
                                     name === '%%' && <Center
-                                        gap={8}
+                                        gap={{
+                                            base: 2,
+                                            md: 8
+                                        }}
+                                        w={"full"}
+                                        flexDir={{
+                                            base: "column",
+                                            md: "row"
+                                        }}
                                     >
                                         <Button
                                             variant={"outline"}
-
+                                            w={{
+                                                base: "full",
+                                                md: "auto"
+                                            }}
                                             colorScheme="indigo"
                                             display={offset === 0 ? "none" : "block"}
                                             onClick={() => {
-                                                setOffset(offset - 20)
+                                                searchParams.set('offset', (offset - 20).toString())
+                                                setSearchParams(searchParams)
                                                 setLimit(limit)
                                             }}
                                         >
                                             20 Pokemons Anteriores
                                         </Button>
                                         <Button
+                                            w={{
+                                                base: "full",
+                                                md: "auto"
+                                            }}
                                             colorScheme="indigo"
                                             onClick={() => {
-                                                setOffset(offset + 20)
+                                                searchParams.set('offset', (offset + 20).toString())
+                                                setSearchParams(searchParams)
                                                 setLimit(limit)
                                             }}
                                         >

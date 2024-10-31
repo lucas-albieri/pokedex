@@ -50,7 +50,10 @@ export const PokemonCard = ({ pokemon }: Props) => {
                 <Flex
                     justifyContent={"center"}
                     alignItems={"center"}
-                    gap={3}
+                    gap={{
+                        base: 1,
+                        md: 3
+                    }}
                 >
                     <Text
                         color={"gray.900"}
@@ -61,7 +64,10 @@ export const PokemonCard = ({ pokemon }: Props) => {
                         {pokemon.name}
                     </Text>
                     <Text
-                        fontSize={"sm"}
+                        fontSize={{
+                            base: "xs",
+                            md: "sm"
+                        }}
                         color={"gray.500"}
                     >
                         #{pokemon.id}
@@ -79,7 +85,10 @@ export const PokemonCard = ({ pokemon }: Props) => {
                                 color={"white"}
                                 bgColor={typeColors[type.pokemon_v2_type.name as keyof typeof typeColors]}
                                 px={2}
-                                fontSize={"sm"}
+                                fontSize={{
+                                    base: "xs",
+                                    md: "sm"
+                                }}
                                 borderRadius={"md"}
                             >
                                 {getTypeTranslations(type.pokemon_v2_type.name as TypeEnum)}

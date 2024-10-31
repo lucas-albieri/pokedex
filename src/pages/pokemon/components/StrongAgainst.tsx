@@ -13,7 +13,12 @@ type Props = {
 export default function StrongAgainst({ pokemon_v2_typeefficacies }: Props) {
 
     return (
-        <Box>
+        <Box
+            mt={{
+                base: 2,
+                md: 0
+            }}
+        >
             <Text
                 fontWeight={"bold"}
                 fontSize={"xl"}
@@ -31,8 +36,15 @@ export default function StrongAgainst({ pokemon_v2_typeefficacies }: Props) {
                         color={"white"}
                         py={1}
                         fontWeight={500}
-                        px={8}
+                        px={{
+                            base: 4,
+                            md: 8
+                        }}
                         borderRadius={8}
+                        fontSize={{
+                            base: "sm",
+                            md: "md"
+                        }}
                         key={type.pokemonV2TypeByTargetTypeId.name}
                     >
                         {getTypeTranslations(type.pokemonV2TypeByTargetTypeId.name as TypeEnum)}
