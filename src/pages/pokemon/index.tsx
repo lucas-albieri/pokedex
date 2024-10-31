@@ -110,7 +110,10 @@ export const PokemonPage = () => {
                             <Flex
                                 pos={"absolute"}
                                 left={0}
-                                px={14}
+                                px={{
+                                    base: 0,
+                                    md: 14
+                                }}
                             >
                                 <Link
                                     to={"/pokemons"}
