@@ -1,6 +1,6 @@
 # Pokédex Generations
 
-[![Pokédex Screenshot](./public/print.png)]([https://seu-usuario.github.io/sua-pokedex](https://github.com/lucas-albieri/pokedex))
+[![Pokédex Screenshot](./public/print1.png)]([https://seu-usuario.github.io/sua-pokedex](https://github.com/lucas-albieri/pokedex))
 
 > [Acesse o projeto online](https://pokedex-zeta-inky.vercel.app/)
 
