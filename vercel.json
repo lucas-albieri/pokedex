@@ -9,10 +9,6 @@
             "destination": "/api/$1"
         },
         {
-            "source": "/auth/(.*)",
-            "destination": "/auth/$1"
-        },
-        {
             "source": "/pokemons/(.*)",
             "destination": "/pokemons/$1"
         },
