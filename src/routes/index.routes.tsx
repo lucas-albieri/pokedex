@@ -5,11 +5,14 @@ import { PokemonsPage } from "../pages/pokemons";
 import { PokemonPage } from "../pages/pokemon";
 
 export const Router = () => {
+
+    const widthWindow = window.innerWidth
+
     return (
         <Routes>
             <Route
                 path="/"
-                element={<Home />}
+                element={widthWindow > 768 ? <Home /> : <PokemonsPage />}
             />
             <Route
                 path="pokemons"

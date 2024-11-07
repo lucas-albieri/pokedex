@@ -44,6 +44,10 @@ export const PokemonsPage = () => {
         debouncedSave(value);
     };
 
+    if (pokemons?.length === 0) {
+        setName("%%")
+    }
+
     return (
         <Layout>
             <Image

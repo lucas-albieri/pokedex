@@ -42,7 +42,8 @@ export const Navbar = () => {
                 }}
                 px={{
                     base: 2,
-                    md: 60
+                    md: 4,
+                    lg: 60
                 }}
                 align={'center'}
                 borderBottom={isScrolled ? "1px solid #efebf5" : "2px solid #efebf5"}
@@ -154,7 +155,7 @@ export const Navbar = () => {
 
 const NAV_ITEMS: Array<NavItem> = [
     {
-        label: 'Home',
+        label: 'Início',
         href: '/'
     },
     {
