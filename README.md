@@ -1,30 +1,25 @@
-# React + TypeScript + Vite
+# Pokédex Generations
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Uma Pokédex interativa criada para exibir informações detalhadas dos Pokémon. Este projeto foi desenvolvido utilizando tecnologias modernas de frontend para proporcionar uma experiência dinâmica e visualmente atrativa.
 
-Currently, two official plugins are available:
+## 🔍 Funcionalidades
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Pesquisa por Pokémon**: Busque Pokémon pelo nome na Pokédex.
+- **Exibição de Detalhes**: Informações detalhadas como tipo, habilidades e estatísticas de batalha (HP, Ataque, Defesa, etc.).
+- **Gráficos de Status**: Visualização gráfica das estatísticas de cada Pokémon usando gráficos de radar.
+- **Imagens em Alta Resolução**: Mostra sprites de cada Pokémon.
 
-## Expanding the ESLint configuration
+## 🛠 Tecnologias Utilizadas
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- **React** com **Chakra UI** para a interface de usuário.
+- **GraphQL** e **Apollo Client** para consultas na **PokeAPI**.
+- **Chart.js** integrado com **react-chartjs-2** para gráficos de status dos Pokémon.
+- **React Hook Form** para lidar com inputs e validações.
 
-- Configure the top-level `parserOptions` property like this:
+## 🚀 Como Executar o Projeto
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+1. Clone o repositório:
+   ```bash
+   git clone https://github.com/lucas-albieri/pokedex
+   cd pokedex
+   
