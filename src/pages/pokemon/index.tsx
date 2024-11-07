@@ -11,7 +11,7 @@ import { Loading } from "./components/Loading";
 import { hexToRgba } from "../../functions/hexToRgba";
 import { PokemonInfos } from "./components/PokemonInfos";
 import StrongAgainst from "./components/StrongAgainst";
-import TranslateComponent from "../../api/translate";
+// import TranslateComponent from "../../api/translate";
 import EvolutionLine from "./components/EvolutionLine";
 import bg from "../../assets/images/squirtle.png";
 import { ChevronLeftIcon } from "@chakra-ui/icons";
