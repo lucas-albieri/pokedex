@@ -1,5 +1,9 @@
 # Pokédex Generations
 
+[![Pokédex Screenshot](./public/print1.png)]([https://seu-usuario.github.io/sua-pokedex](https://github.com/lucas-albieri/pokedex))
+
+> [Acesse o projeto online](https://pokedex-zeta-inky.vercel.app/)
+
 Uma Pokédex interativa criada para exibir informações detalhadas dos Pokémon. Este projeto foi desenvolvido utilizando tecnologias modernas de frontend para proporcionar uma experiência dinâmica e visualmente atrativa.
 
 ## 🔍 Funcionalidades
