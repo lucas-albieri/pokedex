@@ -1,6 +1,6 @@
 # Pokédex Generations
 
-[![GitHub Pages](https://img.shields.io/badge/🌐-Ver%20Online-brightgreen)](https://lucas-albieri.github.io/pokedex)
+[![GitHub Pages](https://img.shields.io/badge/🌐-Ver%20Online-brightgreen)](https://pokedex-zeta-inky.vercel.app/)
 ![GitHub last commit](https://img.shields.io/github/last-commit/lucas-albieri/pokedex)
 ![GitHub issues](https://img.shields.io/github/issues/lucas-albieri/pokedex)
 ![GitHub stars](https://img.shields.io/github/stars/lucas-albieri/pokedex)
