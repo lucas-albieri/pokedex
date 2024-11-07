@@ -29,5 +29,6 @@ Uma Pokédex interativa criada para exibir informações detalhadas dos Pokémon
    
 2. Para iniciar:
    ```bash
-   pnpm dev
+   Instale as dependências com pnpm i
+   Para iniciar use: pnpm dev
    
