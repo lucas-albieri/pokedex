@@ -18,7 +18,7 @@ Uma Pokédex interativa criada para exibir informações detalhadas dos Pokémon
 - **React** com **Chakra UI** para a interface de usuário.
 - **GraphQL** e **Apollo Client** para consultas na **PokeAPI**.
 - **Chart.js** integrado com **react-chartjs-2** para gráficos de status dos Pokémon.
-- **React Hook Form** para lidar com inputs e validações.
+- **LINGVA** para traduzir as descrições dos Pokemons - obs: Biblioteca sujeita a instabilidade
 
 ## 🚀 Como Executar o Projeto
 
@@ -26,4 +26,9 @@ Uma Pokédex interativa criada para exibir informações detalhadas dos Pokémon
    ```bash
    git clone https://github.com/lucas-albieri/pokedex
    cd pokedex
+   
+2. Para iniciar:
+   ```bash
+   Instale as dependências com pnpm i
+   Para iniciar use: pnpm dev
    
