@@ -1,6 +1,6 @@
 # Pokédex Generations
 
-[![Pokédex Screenshot](./public/print1.png)]([https://seu-usuario.github.io/sua-pokedex](https://github.com/lucas-albieri/pokedex))
+[![Pokédex Screenshot](./public/print2.png)]([https://seu-usuario.github.io/sua-pokedex](https://github.com/lucas-albieri/pokedex))
 
 > [Acesse o projeto online](https://pokedex-zeta-inky.vercel.app/)
 
@@ -18,7 +18,7 @@ Uma Pokédex interativa criada para exibir informações detalhadas dos Pokémon
 - **React** com **Chakra UI** para a interface de usuário.
 - **GraphQL** e **Apollo Client** para consultas na **PokeAPI**.
 - **Chart.js** integrado com **react-chartjs-2** para gráficos de status dos Pokémon.
-- **React Hook Form** para lidar com inputs e validações.
+- **LINGVA** para traduzir as descrições dos Pokemons - obs: Biblioteca sujeita a instabilidade
 
 ## 🚀 Como Executar o Projeto
 
