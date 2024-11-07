@@ -234,9 +234,10 @@ export const PokemonPage = () => {
                                         md: "xl"
                                     }}
                                 >
-                                    <TranslateComponent
+                                    {/* <TranslateComponent
                                         text={pokemon?.pokemon_v2_pokemonspecy?.pokemon_v2_pokemonspeciesflavortexts[0].flavor_text ?? "Sem descrição"}
-                                    />
+                                    /> */}
+                                    {pokemon?.pokemon_v2_pokemonspecy?.pokemon_v2_pokemonspeciesflavortexts[0].flavor_text ?? "Sem descrição"}
                                 </Text>
                                 <Grid
                                     templateColumns={"repeat(2, 1fr)"}

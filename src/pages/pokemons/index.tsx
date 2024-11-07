@@ -1,6 +1,6 @@
 import { Box, Button, Center, Flex, Grid, GridItem, Image, Input, Spinner, Stack, Text } from "@chakra-ui/react"
 import { Layout } from "../../components/layout"
-import wpp from "../../assets/images/wpp4.png"
+import wpp from "../../assets/images/wpp.jpg"
 import { SearchIcon } from "@chakra-ui/icons"
 import { PokemonCard } from "./components/pokemonCard"
 import { ChangeEvent, useCallback, useState } from "react"
