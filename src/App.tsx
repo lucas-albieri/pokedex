@@ -13,16 +13,19 @@ const client = new ApolloClient({
 function App() {
 
   return (
-    <ApolloProvider
-      client={client}
-    >
-      <HelmetProvider>
-        <Router />
-        <GlobalStyles />
-        <Analytics />
-      </HelmetProvider>
+    <>
+      <ApolloProvider
+        client={client}
+      >
+        <HelmetProvider>
+          <Router />
+          <GlobalStyles />
+        </HelmetProvider>
 
-    </ApolloProvider>
+      </ApolloProvider>
+      <Analytics />
+    </>
+
   )
 }
 
