@@ -1,6 +1,6 @@
 # Pokédex Generations
 
-[![Pokédex Screenshot](./public/print2.png)]([https://seu-usuario.github.io/sua-pokedex](https://github.com/lucas-albieri/pokedex))
+[![Pokédex Screenshot](./public/print.png)]([https://seu-usuario.github.io/sua-pokedex](https://github.com/lucas-albieri/pokedex))
 
 > [Acesse o projeto online](https://pokedex-zeta-inky.vercel.app/)
 
@@ -26,4 +26,8 @@ Uma Pokédex interativa criada para exibir informações detalhadas dos Pokémon
    ```bash
    git clone https://github.com/lucas-albieri/pokedex
    cd pokedex
+   
+2. Para iniciar:
+   ```bash
+   pnpm dev
    
