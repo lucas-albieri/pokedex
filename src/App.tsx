@@ -3,6 +3,7 @@ import { HelmetProvider } from 'react-helmet-async';
 import { GlobalStyles } from './theme/globalStyles';
 import { Router } from './routes/index.routes';
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
+import { Analytics } from '@vercel/analytics/react';
 
 const client = new ApolloClient({
   uri: 'https://beta.pokeapi.co/graphql/v1beta',
@@ -18,6 +19,7 @@ function App() {
       <HelmetProvider>
         <Router />
         <GlobalStyles />
+        <Analytics />
       </HelmetProvider>
 
     </ApolloProvider>
