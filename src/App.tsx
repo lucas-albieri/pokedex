@@ -19,6 +19,7 @@ function App() {
         <Router />
         <GlobalStyles />
       </HelmetProvider>
+
     </ApolloProvider>
   )
 }
