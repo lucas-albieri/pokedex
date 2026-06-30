@@ -1,6 +1,20 @@
-import { Box, Flex, Image, SimpleGrid, Skeleton, Text } from "@chakra-ui/react"
+import {
+    Box,
+    Flex,
+    Image,
+    Modal,
+    ModalBody,
+    ModalCloseButton,
+    ModalContent,
+    ModalOverlay,
+    SimpleGrid,
+    Skeleton,
+    Text,
+    useDisclosure,
+} from "@chakra-ui/react"
 import { useQuery } from "@tanstack/react-query"
 import { motion } from "framer-motion"
+import { useState } from "react"
 import { fetchTcgCards, TcgCard } from "../../../queries/fetchTcgCards"
 
 const MotionBox = motion(Box)
@@ -12,11 +26,19 @@ type Props = {
 
 export default function TcgCards({ name, accentColor }: Props) {
 
+    const { isOpen, onOpen, onClose } = useDisclosure()
+    const [selectedCard, setSelectedCard] = useState<TcgCard | null>(null)
+
     const { data, isLoading, isError } = useQuery({
         queryKey: ["tcg-cards", name],
         queryFn: () => fetchTcgCards(name),
         enabled: !!name,
     })
+
+    function handleSelectCard(card: TcgCard) {
+        setSelectedCard(card)
+        onOpen()
+    }
 
     if (isError) return null
 
@@ -86,21 +108,75 @@ export default function TcgCards({ name, accentColor }: Props) {
                             key={card.id}
                             card={card}
                             accentColor={accentColor}
+                            onClick={() => handleSelectCard(card)}
                         />
                     ))}
                 </SimpleGrid>
             )}
+
+            <Modal
+                isOpen={isOpen}
+                onClose={onClose}
+                isCentered
+                size={{ base: "xs", sm: "sm", md: "md" }}
+                motionPreset={"scale"}
+            >
+                <ModalOverlay bg={"blackAlpha.800"} backdropFilter={"blur(6px)"} />
+                <ModalContent
+                    bg={"transparent"}
+                    boxShadow={"none"}
+                    overflow={"visible"}
+                >
+                    <ModalCloseButton
+                        color={"white"}
+                        bg={"blackAlpha.600"}
+                        borderRadius={"full"}
+                        top={-10}
+                        right={0}
+                        _hover={{ bg: "blackAlpha.800" }}
+                    />
+                    <ModalBody p={0}>
+                        {selectedCard && (
+                            <Box>
+                                <Image
+                                    src={selectedCard.images.large}
+                                    alt={`Carta ${selectedCard.name} - ${selectedCard.set.name}`}
+                                    w={"100%"}
+                                    borderRadius={16}
+                                    style={{
+                                        filter: `drop-shadow(0 12px 32px ${accentColor}99)`,
+                                    }}
+                                />
+                                <Text
+                                    mt={4}
+                                    textAlign={"center"}
+                                    color={"white"}
+                                    fontSize={"sm"}
+                                    fontWeight={"medium"}
+                                >
+                                    {selectedCard.set.name}
+                                </Text>
+                            </Box>
+                        )}
+                    </ModalBody>
+                </ModalContent>
+            </Modal>
         </Box>
     )
 }
 
-function CardItem({ card, accentColor }: { card: TcgCard; accentColor: string }) {
+function CardItem({
+    card,
+    accentColor,
+    onClick,
+}: {
+    card: TcgCard
+    accentColor: string
+    onClick: () => void
+}) {
     return (
         <MotionBox
-            as={"a"}
-            href={card.images.large}
-            target={"_blank"}
-            rel={"noopener noreferrer"}
+            onClick={onClick}
             display={"block"}
             borderRadius={12}
             overflow={"hidden"}
