@@ -84,6 +84,7 @@ export type PokemonModel = {
     id: number
     height: number
     weight: number
+    base_experience?: number
     pokemon_v2_pokemontypes: PokemonType[]
     pokemon_v2_pokemonsprites: PokemonSprite[]
     pokemon_v2_pokemonabilities?: PokemonAbility[]

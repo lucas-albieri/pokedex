@@ -10,7 +10,6 @@ import { Loading } from "./components/Loading";
 import { hexToRgba } from "../../functions/hexToRgba";
 import { PokemonHero } from "./components/PokemonHero";
 import { PokemonArtwork } from "./components/PokemonArtwork";
-import { AboutSection } from "./components/AboutSection";
 import StrongAgainst from "./components/StrongAgainst";
 import EvolutionLine from "./components/EvolutionLine";
 import TcgCards from "./components/TcgCards";
