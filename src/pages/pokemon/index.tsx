@@ -13,6 +13,7 @@ import { PokemonInfos } from "./components/PokemonInfos";
 import StrongAgainst from "./components/StrongAgainst";
 // import TranslateComponent from "../../api/translate";
 import EvolutionLine from "./components/EvolutionLine";
+import TcgCards from "./components/TcgCards";
 import bg from "../../assets/images/squirtle.png";
 import { ChevronLeftIcon } from "@chakra-ui/icons";
 
@@ -325,6 +326,12 @@ export const PokemonPage = () => {
                                 />
                             </Box>
                         </Flex>
+
+                        {/* cartas do TCG */}
+                        <TcgCards
+                            name={pokemon?.name}
+                            accentColor={typeColors[pokemon?.pokemon_v2_pokemontypes[0].pokemon_v2_type.name as keyof typeof typeColors]}
+                        />
                     </Stack>
             }
 
