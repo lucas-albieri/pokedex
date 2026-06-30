@@ -1,10 +1,10 @@
 import { useQuery } from "@apollo/client";
 import { Layout } from "../../components/layout"
 import { Link, useSearchParams } from "react-router-dom";
-import { Box, Flex, Image, Stack, Text } from "@chakra-ui/react";
+import { Box, Flex, Grid, Image, Stack, Text } from "@chakra-ui/react";
 import { PokemonModel } from "../../models/pokemon-model";
 import { fetchPokemonById } from "../../queries/fetchPokemonById";
-import { typeColors } from "../../enuns/TypeEnum";
+import { getTypeTranslations, typeColors, TypeEnum } from "../../enuns/TypeEnum";
 import { StatsBars } from "./components/StatsBars";
 import { Loading } from "./components/Loading";
 import { hexToRgba } from "../../functions/hexToRgba";
@@ -15,6 +15,8 @@ import StrongAgainst from "./components/StrongAgainst";
 import EvolutionLine from "./components/EvolutionLine";
 import TcgCards from "./components/TcgCards";
 import bg from "../../assets/images/squirtle.png";
+import { PokemonInfos } from "./components/PokemonInfos";
+import TranslateComponent from "../../api/translate";
 
 export const PokemonPage = () => {
 
@@ -170,10 +172,10 @@ export const PokemonPage = () => {
                                         md: "xl"
                                     }}
                                 >
-                                    {/* <TranslateComponent
+                                    <TranslateComponent
                                         text={pokemon?.pokemon_v2_pokemonspecy?.pokemon_v2_pokemonspeciesflavortexts[0].flavor_text ?? "Sem descrição"}
-                                    /> */}
-                                    {pokemon?.pokemon_v2_pokemonspecy?.pokemon_v2_pokemonspeciesflavortexts[0].flavor_text ?? "Sem descrição"}
+                                    />
+                                    {/* {pokemon?.pokemon_v2_pokemonspecy?.pokemon_v2_pokemonspeciesflavortexts[0].flavor_text ?? "Sem descrição"} */}
                                 </Text>
                                 <Grid
                                     templateColumns={"repeat(2, 1fr)"}
@@ -255,13 +257,14 @@ export const PokemonPage = () => {
                                     pokemon_v2_typeefficacies={pokemon?.pokemon_v2_pokemontypes[0].pokemon_v2_type.pokemon_v2_typeefficacies ?? []}
                                 />
 
-                                {/* linha evolutiva */}
-                                <EvolutionLine
-                                    evolutionChain={pokemon?.pokemon_v2_pokemonspecy?.pokemon_v2_evolutionchain as any}
-                                />
                             </Box>
                         </Flex>
 
+                        {/* linha evolutiva */}
+                        <EvolutionLine
+                            evolutionChain={pokemon?.pokemon_v2_pokemonspecy?.pokemon_v2_evolutionchain as any}
+                            accentColor={typeColors[pokemon?.pokemon_v2_pokemontypes[0].pokemon_v2_type.name as keyof typeof typeColors]}
+                        />
                         {/* cartas do TCG */}
                         <TcgCards
                             name={pokemon?.name}

@@ -17,8 +17,6 @@ import { motion } from "framer-motion"
 import { useState } from "react"
 import { fetchTcgCards, TcgCard } from "../../../queries/fetchTcgCards"
 
-const MotionBox = motion(Box)
-
 type Props = {
     name: string
     accentColor: string
@@ -46,8 +44,8 @@ export default function TcgCards({ name, accentColor }: Props) {
 
     return (
         <Box
-            mt={{ base: 6, md: 12 }}
-            pt={{ base: 6, md: 10 }}
+            mt={{ base: 6, md: 2 }}
+            pt={{ base: 6, md: 8 }}
             borderTop={"1px solid"}
             borderColor={"gray.200"}
         >
@@ -84,10 +82,10 @@ export default function TcgCards({ name, accentColor }: Props) {
 
             {isLoading ? (
                 <SimpleGrid
-                    columns={{ base: 2, sm: 3, md: 4, lg: 6 }}
+                    columns={{ base: 2, sm: 3, md: 4, lg: 5 }}
                     gap={{ base: 3, md: 5 }}
                 >
-                    {Array.from({ length: 6 }).map((_, index) => (
+                    {Array.from({ length: 5 }).map((_, index) => (
                         <Skeleton
                             key={index}
                             borderRadius={12}
@@ -100,7 +98,7 @@ export default function TcgCards({ name, accentColor }: Props) {
                 </SimpleGrid>
             ) : (
                 <SimpleGrid
-                    columns={{ base: 2, sm: 3, md: 4, lg: 6 }}
+                    columns={{ base: 2, sm: 3, md: 4, lg: 5 }}
                     gap={{ base: 3, md: 5 }}
                 >
                     {data?.map((card) => (
@@ -175,26 +173,31 @@ function CardItem({
     onClick: () => void
 }) {
     return (
-        <MotionBox
-            onClick={onClick}
-            display={"block"}
-            borderRadius={12}
-            overflow={"hidden"}
-            cursor={"pointer"}
-            initial={{ y: 0 }}
+        <motion.div
             whileHover={{ y: -8, scale: 1.03 }}
-            transition={{ type: "spring", stiffness: 300, damping: 20 }}
-            style={{
-                filter: `drop-shadow(0 8px 16px ${accentColor}55)`,
+            transition={{
+                type: "spring",
+                stiffness: 300,
+                damping: 20,
             }}
         >
-            <Image
-                src={card.images.small}
-                alt={`Carta ${card.name} - ${card.set.name}`}
-                w={"100%"}
-                loading={"lazy"}
+            <Box
+                onClick={onClick}
                 borderRadius={12}
-            />
-        </MotionBox>
+                overflow="hidden"
+                cursor="pointer"
+                style={{
+                    filter: `drop-shadow(0 8px 16px ${accentColor}55)`,
+                }}
+            >
+                <Image
+                    src={card.images.small}
+                    alt={`Carta ${card.name} - ${card.set.name}`}
+                    w="100%"
+                    loading="lazy"
+                    borderRadius={12}
+                />
+            </Box>
+        </motion.div>
     )
 }

@@ -1,8 +1,9 @@
-import { Flex, Image, Text } from "@chakra-ui/react"
+import { Box, Flex, Image, Text } from "@chakra-ui/react"
 import { PokemonSprite } from "../../../models/pokemon-model"
 import { useSearchParams } from "react-router-dom"
 
 type Props = {
+    accentColor: string
     evolutionChain: {
         id: number
         pokemon_v2_pokemonspecies: {
@@ -15,28 +16,51 @@ type Props = {
     }
 }
 
-export default function EvolutionLine({ evolutionChain }: Props) {
+export default function EvolutionLine({ evolutionChain, accentColor }: Props) {
 
     const [searchParams, setSearchParams] = useSearchParams()
 
     return (
         <Flex
+            width={"100%"}
             direction="column"
-            mt={{
-                base: 2,
-                md: 0
-            }}
+            mt={{ base: 6, md: 0 }}
+            pt={{ base: 6, md: 8 }}
+            borderTop={"1px solid"}
+            borderColor={"gray.200"}
         >
-            <Text
-                fontWeight={"bold"}
-                fontSize={"xl"}
+            <Flex
+                gap={3}
             >
-                Linha evolutiva
-            </Text>
+                <Box
+                    w={"6px"}
+                    h={{ base: "24px", md: "32px" }}
+                    borderRadius={"full"}
+                    bgColor={accentColor}
+                    display={"flex"}
+                />
+                <Box
+                >
+                    <Text
+                        fontSize={{ base: "xl", md: "3xl" }}
+                        fontWeight={"bold"}
+                        lineHeight={1.1}
+                    >
+                        Linha evolutiva
+                    </Text>
+                    <Text
+                        fontSize={{ base: "xs", md: "sm" }}
+                        color={"gray.500"}
+                    >
+                        Todas as suas formas evolutivas
+                    </Text>
+                </Box>
+            </Flex>
             <Flex
                 gap={4}
-                mt={2}
+                mt={4}
                 flexWrap={"wrap"}
+                w={"100%"}
             >
                 {evolutionChain.pokemon_v2_pokemonspecies.map((species) => (
                     <Flex
@@ -56,7 +80,7 @@ export default function EvolutionLine({ evolutionChain }: Props) {
                         <Image
                             src={species.pokemon_v2_pokemons[0].pokemon_v2_pokemonsprites[0].sprites.other["official-artwork"].front_default}
                             alt={species.name}
-                            boxSize="100px"
+                            boxSize="150px"
                             objectFit={"contain"}
                         />
                         <Text
