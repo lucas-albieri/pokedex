@@ -7,6 +7,7 @@ export const fetchPokemonById = gql`
       name
       height
       weight
+      base_experience
       pokemon_v2_pokemontypes {
         pokemon_v2_type {
           name
@@ -22,6 +23,7 @@ export const fetchPokemonById = gql`
         }
       }
       pokemon_v2_pokemonabilities {
+        is_hidden
         pokemon_v2_ability {
           name
           pokemon_v2_abilitynames {
@@ -46,6 +48,18 @@ export const fetchPokemonById = gql`
           flavor_text
         }
         gender_rate
+        capture_rate
+        base_happiness
+        is_legendary
+        is_mythical
+        pokemon_v2_pokemonspeciesnames(where: { language_id: { _eq: 9 } }, limit: 1) {
+          genus
+        }
+        pokemon_v2_pokemonegggroups {
+          pokemon_v2_egggroup {
+            name
+          }
+        }
 
         # Evolução superior
         pokemon_v2_evolutionchain {

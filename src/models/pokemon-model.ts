@@ -36,6 +36,7 @@ export interface PokemonSprite {
     }
 }
 export interface PokemonAbility {
+    is_hidden?: boolean
     pokemon_v2_ability: {
         name: string
     }
@@ -53,6 +54,18 @@ export interface PokemonSpecies {
         flavor_text: string
     }[]
     gender_rate: number
+    capture_rate?: number
+    base_happiness?: number
+    is_legendary?: boolean
+    is_mythical?: boolean
+    pokemon_v2_pokemonspeciesnames?: {
+        genus: string
+    }[]
+    pokemon_v2_pokemonegggroups?: {
+        pokemon_v2_egggroup: {
+            name: string
+        }
+    }[]
     pokemon_v2_evolutionchain: {
         id: number
         pokemon_v2_pokemonspecies: {
