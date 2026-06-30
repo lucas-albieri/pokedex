@@ -6,7 +6,7 @@ import { PokemonModel } from "../../models/pokemon-model";
 import { fetchPokemonById } from "../../queries/fetchPokemonById";
 import { getTypeTranslations, typeColors, TypeEnum } from "../../enuns/TypeEnum";
 import { Chart as ChartJS, RadialLinearScale, PointElement, LineElement, Filler, Tooltip, Legend } from 'chart.js';
-import { BarChart } from "./components/BarChart";
+import { StatsBars } from "./components/StatsBars";
 import { Loading } from "./components/Loading";
 import { hexToRgba } from "../../functions/hexToRgba";
 import { PokemonInfos } from "./components/PokemonInfos";
@@ -193,24 +193,10 @@ export const PokemonPage = () => {
                                     />
                                 </Box>
 
-                                <Box
-                                    display={{
-                                        base: "none",
-                                        md: "block"
-                                    }}
-                                    border={"1px solid"}
-                                    borderColor={typeColors[pokemon?.pokemon_v2_pokemontypes[0].pokemon_v2_type.name as keyof typeof typeColors]}
-                                    borderRadius={8}
-                                    py={2}
-                                    px={{
-                                        base: 2,
-                                        md: 20
-                                    }}
-                                >
-                                    <BarChart
-                                        values={pokemon?.pokemon_v2_pokemonstats?.map(stat => stat.base_stat) ?? [0, 0, 0, 0, 0, 0]}
-                                    />
-                                </Box>
+                                <StatsBars
+                                    values={pokemon?.pokemon_v2_pokemonstats?.map(stat => stat.base_stat) ?? [0, 0, 0, 0, 0, 0]}
+                                    accentColor={typeColors[pokemon?.pokemon_v2_pokemontypes[0].pokemon_v2_type.name as keyof typeof typeColors]}
+                                />
                             </Box>
 
                             <Box
