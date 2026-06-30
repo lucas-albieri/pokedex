@@ -5,18 +5,17 @@ import { Box, Flex, Grid, Image, Stack, Text } from "@chakra-ui/react";
 import { PokemonModel } from "../../models/pokemon-model";
 import { fetchPokemonById } from "../../queries/fetchPokemonById";
 import { getTypeTranslations, typeColors, TypeEnum } from "../../enuns/TypeEnum";
-import { Chart as ChartJS, RadialLinearScale, PointElement, LineElement, Filler, Tooltip, Legend } from 'chart.js';
-import { BarChart } from "./components/BarChart";
+import { StatsBars } from "./components/StatsBars";
 import { Loading } from "./components/Loading";
 import { hexToRgba } from "../../functions/hexToRgba";
-import { PokemonInfos } from "./components/PokemonInfos";
+import { PokemonHero } from "./components/PokemonHero";
+import { PokemonArtwork } from "./components/PokemonArtwork";
 import StrongAgainst from "./components/StrongAgainst";
-// import TranslateComponent from "../../api/translate";
 import EvolutionLine from "./components/EvolutionLine";
+import TcgCards from "./components/TcgCards";
 import bg from "../../assets/images/squirtle.png";
-import { ChevronLeftIcon } from "@chakra-ui/icons";
-
-ChartJS.register(RadialLinearScale, PointElement, LineElement, Filler, Tooltip, Legend);
+import { PokemonInfos } from "./components/PokemonInfos";
+import TranslateComponent from "../../api/translate";
 
 export const PokemonPage = () => {
 
@@ -30,6 +29,8 @@ export const PokemonPage = () => {
         });
 
     const pokemon = pokemonParams.data?.pokemon_v2_pokemon[0] as PokemonModel
+
+    const accentColor = typeColors[pokemon?.pokemon_v2_pokemontypes?.[0]?.pokemon_v2_type?.name as keyof typeof typeColors]
 
     if (searchParams.get('name') === null) {
         return (
@@ -84,72 +85,32 @@ export const PokemonPage = () => {
                         w={"100%"}
                         bgColor={"white"}
                         px={{
-                            base: 6,
-                            md: 14
+                            base: 4,
+                            md: 10
                         }}
-                        py={4}
-                        borderRadius={8}
+                        py={{
+                            base: 4,
+                            md: 6
+                        }}
+                        gap={{
+                            base: 5,
+                            md: 8
+                        }}
+                        borderRadius={12}
                         border={"2px solid"}
-                        borderColor={hexToRgba(typeColors[pokemon?.pokemon_v2_pokemontypes[0].pokemon_v2_type.name as keyof typeof typeColors], 1)}
+                        borderColor={hexToRgba(accentColor, 1)}
                         boxShadow={`
-                            0 0 20px ${typeColors[pokemon?.pokemon_v2_pokemontypes[0].pokemon_v2_type.name as keyof typeof typeColors]},
-                            0 0 10px ${typeColors[pokemon?.pokemon_v2_pokemontypes[0].pokemon_v2_type.name as keyof typeof typeColors]},
-                            0 0 10px ${typeColors[pokemon?.pokemon_v2_pokemontypes[0].pokemon_v2_type.name as keyof typeof typeColors]},
-                            0 0 10px ${typeColors[pokemon?.pokemon_v2_pokemontypes[0].pokemon_v2_type.name as keyof typeof typeColors]},
-                            0 0 40px ${typeColors[pokemon?.pokemon_v2_pokemontypes[0].pokemon_v2_type.name as keyof typeof typeColors]};`
+                            0 0 20px ${accentColor},
+                            0 0 10px ${accentColor},
+                            0 0 40px ${accentColor};`
                         }
                     >
 
-                        <Flex
-                            alignItems={"center"}
-                            gap={4}
-                            justifyContent={"center"}
-                            w={"100%"}
-                            pos={"relative"}
-                        >
-                            <Flex
-                                pos={"absolute"}
-                                left={0}
-                                px={{
-                                    base: 0,
-                                    md: 14
-                                }}
-                            >
-                                <Link
-                                    to={"/pokemons"}
-                                    style={{
-                                        color: "black",
-                                        fontSize: "0.9rem",
-                                    }}
-                                >
-                                    <ChevronLeftIcon
-                                        w={7}
-                                        h={7}
-                                    />
-                                    Voltar
-                                </Link>
-                            </Flex>
+                        <PokemonHero
+                            pokemon={pokemon}
+                            accentColor={accentColor}
+                        />
 
-                            <Text
-                                fontSize={{
-                                    base: "3xl",
-                                    md: "5xl"
-                                }}
-                                fontWeight={"bold"}
-                                textTransform={"capitalize"}
-                            >
-                                {pokemon?.name}
-                            </Text>
-                            <Text
-                                fontSize={{
-                                    base: "lg",
-                                    md: "2xl"
-                                }}
-                            >
-                                #{pokemon?.id}
-                            </Text>
-
-                        </Flex>
                         <Flex
                             alignItems={"flex-start"}
                             gap={{
@@ -175,41 +136,17 @@ export const PokemonPage = () => {
                                     md: 10
                                 }}
                             >
-                                <Box
-                                    display={"flex"}
-                                    justifyContent={"center"}
-                                    alignItems={"center"}
-                                    bg={hexToRgba(typeColors[pokemon?.pokemon_v2_pokemontypes[0].pokemon_v2_type.name as keyof typeof typeColors], 0.1)}
-                                    borderRadius={8}
-                                >
-                                    <Image
-                                        src={pokemon?.pokemon_v2_pokemonsprites[0].sprites.other["official-artwork"].front_default}
-                                        alt={pokemon?.name}
-                                        w={{
-                                            base: "100%",
-                                            md: "60%"
-                                        }}
-                                    />
-                                </Box>
+                                <PokemonArtwork
+                                    name={pokemon?.name}
+                                    artwork={pokemon?.pokemon_v2_pokemonsprites[0].sprites.other["official-artwork"].front_default}
+                                    shiny={pokemon?.pokemon_v2_pokemonsprites[0].sprites.other["official-artwork"].front_shiny}
+                                    accentColor={accentColor}
+                                />
 
-                                <Box
-                                    display={{
-                                        base: "none",
-                                        md: "block"
-                                    }}
-                                    border={"1px solid"}
-                                    borderColor={typeColors[pokemon?.pokemon_v2_pokemontypes[0].pokemon_v2_type.name as keyof typeof typeColors]}
-                                    borderRadius={8}
-                                    py={2}
-                                    px={{
-                                        base: 2,
-                                        md: 20
-                                    }}
-                                >
-                                    <BarChart
-                                        values={pokemon?.pokemon_v2_pokemonstats?.map(stat => stat.base_stat) ?? [0, 0, 0, 0, 0, 0]}
-                                    />
-                                </Box>
+                                <StatsBars
+                                    values={pokemon?.pokemon_v2_pokemonstats?.map(stat => stat.base_stat) ?? [0, 0, 0, 0, 0, 0]}
+                                    accentColor={typeColors[pokemon?.pokemon_v2_pokemontypes[0].pokemon_v2_type.name as keyof typeof typeColors]}
+                                />
                             </Box>
 
                             <Box
@@ -234,10 +171,10 @@ export const PokemonPage = () => {
                                         md: "xl"
                                     }}
                                 >
-                                    {/* <TranslateComponent
+                                    <TranslateComponent
                                         text={pokemon?.pokemon_v2_pokemonspecy?.pokemon_v2_pokemonspeciesflavortexts[0].flavor_text ?? "Sem descrição"}
-                                    /> */}
-                                    {pokemon?.pokemon_v2_pokemonspecy?.pokemon_v2_pokemonspeciesflavortexts[0].flavor_text ?? "Sem descrição"}
+                                    />
+                                    {/* {pokemon?.pokemon_v2_pokemonspecy?.pokemon_v2_pokemonspeciesflavortexts[0].flavor_text ?? "Sem descrição"} */}
                                 </Text>
                                 <Grid
                                     templateColumns={"repeat(2, 1fr)"}
@@ -319,12 +256,19 @@ export const PokemonPage = () => {
                                     pokemon_v2_typeefficacies={pokemon?.pokemon_v2_pokemontypes[0].pokemon_v2_type.pokemon_v2_typeefficacies ?? []}
                                 />
 
-                                {/* linha evolutiva */}
-                                <EvolutionLine
-                                    evolutionChain={pokemon?.pokemon_v2_pokemonspecy?.pokemon_v2_evolutionchain as any}
-                                />
                             </Box>
                         </Flex>
+
+                        {/* linha evolutiva */}
+                        <EvolutionLine
+                            evolutionChain={pokemon?.pokemon_v2_pokemonspecy?.pokemon_v2_evolutionchain as any}
+                            accentColor={typeColors[pokemon?.pokemon_v2_pokemontypes[0].pokemon_v2_type.name as keyof typeof typeColors]}
+                        />
+                        {/* cartas do TCG */}
+                        <TcgCards
+                            name={pokemon?.name}
+                            accentColor={typeColors[pokemon?.pokemon_v2_pokemontypes[0].pokemon_v2_type.name as keyof typeof typeColors]}
+                        />
                     </Stack>
             }
 
